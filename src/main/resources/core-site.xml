@@ -1,0 +1,232 @@
+<!--Fri May 8 01:53:19 2015 -->
+<configuration>
+
+	<property>
+		<name>fs.defaultFS</name>
+		<value>hdfs://allinone:8020</value>
+		<final>true</final>
+	</property>
+
+	<property>
+		<name>fs.trash.interval</name>
+		<value>360</value>
+	</property>
+
+	<property>
+		<name>hadoop.http.authentication.cookie.domain</name>
+		<value></value>
+	</property>
+
+	<property>
+		<name>hadoop.http.authentication.cookie.path</name>
+		<value></value>
+	</property>
+
+	<property>
+		<name>hadoop.http.authentication.kerberos.keytab</name>
+		<value>/etc/security/keytabs/spnego.service.keytab</value>
+	</property>
+
+	<property>
+		<name>hadoop.http.authentication.kerberos.name.rules</name>
+		<value></value>
+	</property>
+
+	<property>
+		<name>hadoop.http.authentication.kerberos.principal</name>
+		<value>HTTP/_HOST@EXAMPLE.COM</value>
+	</property>
+
+	<property>
+		<name>hadoop.http.authentication.signature.secret</name>
+		<value></value>
+	</property>
+
+	<property>
+		<name>hadoop.http.authentication.signature.secret.file</name>
+		<value></value>
+	</property>
+
+	<property>
+		<name>hadoop.http.authentication.signer.secret.provider</name>
+		<value></value>
+	</property>
+
+	<property>
+		<name>hadoop.http.authentication.signer.secret.provider.object</name>
+		<value></value>
+	</property>
+
+	<property>
+		<name>hadoop.http.authentication.simple.anonymous.allowed</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>hadoop.http.authentication.token.validity</name>
+		<value></value>
+	</property>
+
+	<property>
+		<name>hadoop.http.authentication.type</name>
+		<value>simple</value>
+	</property>
+
+	<property>
+		<name>hadoop.http.filter.initializers</name>
+		<value></value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.falcon.groups</name>
+		<value>users</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.falcon.hosts</name>
+		<value>*</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.hcat.groups</name>
+		<value>users</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.hcat.hosts</name>
+		<value>allinone</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.hive.groups</name>
+		<value>users</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.hive.hosts</name>
+		<value>allinone</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.HTTP.groups</name>
+		<value>users</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.HTTP.hosts</name>
+		<value>allinone</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.hue.groups</name>
+		<value>*</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.hue.hosts</name>
+		<value>*</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.hbase.groups</name>
+		<value>*</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.hbase.hosts</name>
+		<value>*</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.knox.groups</name>
+		<value>users</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.knox.hosts</name>
+		<value>allinone</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.oozie.groups</name>
+		<value>users</value>
+	</property>
+
+	<property>
+		<name>hadoop.proxyuser.oozie.hosts</name>
+		<value>allinone</value>
+	</property>
+
+	<property>
+		<name>hadoop.security.auth_to_local</name>
+		<value>RULE:[2:$1@$0](rm@.*EXAMPLE.COM)s/.*/yarn/
+			RULE:[2:$1@$0](nm@.*EXAMPLE.COM)s/.*/yarn/
+			RULE:[2:$1@$0](nn@.*EXAMPLE.COM)s/.*/hdfs/
+			RULE:[2:$1@$0](dn@.*EXAMPLE.COM)s/.*/hdfs/
+			RULE:[2:$1@$0](hbase@.*EXAMPLE.COM)s/.*/hbase/
+			RULE:[2:$1@$0](hbase@.*EXAMPLE.COM)s/.*/hbase/
+			RULE:[2:$1@$0](oozie@.*EXAMPLE.COM)s/.*/oozie/
+			RULE:[2:$1@$0](jhs@.*EXAMPLE.COM)s/.*/mapred/
+			RULE:[2:$1@$0](jn/_HOST@.*EXAMPLE.COM)s/.*/hdfs/
+			RULE:[2:$1@$0](falcon@.*EXAMPLE.COM)s/.*/falcon/
+			DEFAULT
+		</value>
+	</property>
+
+	<property>
+		<name>hadoop.security.authentication</name>
+		<value>kerberos</value>
+	</property>
+
+	<property>
+		<name>hadoop.security.authorization</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>io.compression.codecs</name>
+		<value>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,org.apache.hadoop.io.compress.SnappyCodec
+		</value>
+	</property>
+
+	<property>
+		<name>io.file.buffer.size</name>
+		<value>131072</value>
+	</property>
+
+	<property>
+		<name>io.serializations</name>
+		<value>org.apache.hadoop.io.serializer.WritableSerialization</value>
+	</property>
+
+	<property>
+		<name>ipc.client.connect.max.retries</name>
+		<value>50</value>
+	</property>
+
+	<property>
+		<name>ipc.client.connection.maxidletime</name>
+		<value>30000</value>
+	</property>
+
+	<property>
+		<name>ipc.client.idlethreshold</name>
+		<value>8000</value>
+	</property>
+
+	<property>
+		<name>ipc.server.tcpnodelay</name>
+		<value>true</value>
+	</property>
+
+	<property>
+		<name>mapreduce.jobtracker.webinterface.trusted</name>
+		<value>false</value>
+	</property>
+
+	<property>
+		<name>proxyuser_group</name>
+		<value>users</value>
+	</property>
+
+</configuration>
