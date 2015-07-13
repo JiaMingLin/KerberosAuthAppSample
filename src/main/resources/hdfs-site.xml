@@ -1,4 +1,4 @@
-<!--Tue May 12 17:17:44 2015-->
+<!--Sun Jul 12 10:25:14 2015-->
     <configuration>
     
     <property>
@@ -14,6 +14,11 @@
     <property>
       <name>dfs.blocksize</name>
       <value>134217728</value>
+    </property>
+    
+    <property>
+      <name>dfs.client.failover.proxy.provider.datanode</name>
+      <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
     </property>
     
     <property>
@@ -33,7 +38,7 @@
     
     <property>
       <name>dfs.datanode.address</name>
-      <value>0.0.0.0:1019</value>
+      <value>0.0.0.0:50010</value>
     </property>
     
     <property>
@@ -63,7 +68,7 @@
     
     <property>
       <name>dfs.datanode.http.address</name>
-      <value>0.0.0.0:1022</value>
+      <value>0.0.0.0:50075</value>
     </property>
     
     <property>
@@ -77,16 +82,6 @@
     </property>
     
     <property>
-      <name>dfs.datanode.kerberos.principal</name>
-      <value>dn/_HOST@EXAMPLE.COM</value>
-    </property>
-    
-    <property>
-      <name>dfs.datanode.keytab.file</name>
-      <value>/etc/security/keytabs/dn.service.keytab</value>
-    </property>
-    
-    <property>
       <name>dfs.datanode.max.transfer.threads</name>
       <value>16384</value>
     </property>
@@ -94,6 +89,21 @@
     <property>
       <name>dfs.domain.socket.path</name>
       <value>/var/lib/hadoop-hdfs/dn_socket</value>
+    </property>
+    
+    <property>
+      <name>dfs.ha.automatic-failover.enabled</name>
+      <value>true</value>
+    </property>
+    
+    <property>
+      <name>dfs.ha.fencing.methods</name>
+      <value>shell(/bin/true)</value>
+    </property>
+    
+    <property>
+      <name>dfs.ha.namenodes.datanode</name>
+      <value>nn1,nn2</value>
     </property>
     
     <property>
@@ -118,27 +128,12 @@
     
     <property>
       <name>dfs.journalnode.edits.dir</name>
-      <value>/hadoop/hdfs/journalnode</value>
+      <value>/hadoop/hdfs/journal</value>
     </property>
     
     <property>
       <name>dfs.journalnode.http-address</name>
       <value>0.0.0.0:8480</value>
-    </property>
-    
-    <property>
-      <name>dfs.journalnode.kerberos.internal.spnego.principal</name>
-      <value>HTTP/_HOST@EXAMPLE.COM</value>
-    </property>
-    
-    <property>
-      <name>dfs.journalnode.kerberos.principal</name>
-      <value>jn/_HOST@EXAMPLE.COM</value>
-    </property>
-    
-    <property>
-      <name>dfs.journalnode.keytab.file</name>
-      <value>/etc/security/keytabs/jn.service.keytab</value>
     </property>
     
     <property>
@@ -183,28 +178,33 @@
     
     <property>
       <name>dfs.namenode.http-address</name>
-      <value>allinone:50070</value>
+      <value>ambarisrv:50070</value>
       <final>true</final>
     </property>
     
     <property>
+      <name>dfs.namenode.http-address.datanode.nn1</name>
+      <value>ambarisrv:50070</value>
+    </property>
+    
+    <property>
+      <name>dfs.namenode.http-address.datanode.nn2</name>
+      <value>datanode:50070</value>
+    </property>
+    
+    <property>
       <name>dfs.namenode.https-address</name>
-      <value>allinone:50470</value>
+      <value>ambarisrv:50470</value>
     </property>
     
     <property>
-      <name>dfs.namenode.kerberos.internal.spnego.principal</name>
-      <value>${dfs.web.authentication.kerberos.principal}</value>
+      <name>dfs.namenode.https-address.datanode.nn1</name>
+      <value>ambarisrv:50470</value>
     </property>
     
     <property>
-      <name>dfs.namenode.kerberos.principal</name>
-      <value>nn/_HOST@EXAMPLE.COM</value>
-    </property>
-    
-    <property>
-      <name>dfs.namenode.keytab.file</name>
-      <value>/etc/security/keytabs/nn.service.keytab</value>
+      <name>dfs.namenode.https-address.datanode.nn2</name>
+      <value>datanode:50470</value>
     </property>
     
     <property>
@@ -218,13 +218,28 @@
     </property>
     
     <property>
+      <name>dfs.namenode.rpc-address.datanode.nn1</name>
+      <value>ambarisrv:8020</value>
+    </property>
+    
+    <property>
+      <name>dfs.namenode.rpc-address.datanode.nn2</name>
+      <value>datanode:8020</value>
+    </property>
+    
+    <property>
       <name>dfs.namenode.safemode.threshold-pct</name>
-      <value>1.0f</value>
+      <value>0.99f</value>
     </property>
     
     <property>
       <name>dfs.namenode.secondary.http-address</name>
-      <value>allinone:50090</value>
+      <value>datanode:50090</value>
+    </property>
+    
+    <property>
+      <name>dfs.namenode.shared.edits.dir</name>
+      <value>qjournal://ambarisrv:8485;datanode:8485;master:8485/datanode</value>
     </property>
     
     <property>
@@ -240,6 +255,11 @@
     <property>
       <name>dfs.namenode.write.stale.datanode.ratio</name>
       <value>1.0f</value>
+    </property>
+    
+    <property>
+      <name>dfs.nameservices</name>
+      <value>datanode</value>
     </property>
     
     <property>
@@ -263,34 +283,9 @@
     </property>
     
     <property>
-      <name>dfs.secondary.namenode.kerberos.internal.spnego.principal</name>
-      <value>${dfs.web.authentication.kerberos.principal}</value>
-    </property>
-    
-    <property>
-      <name>dfs.secondary.namenode.kerberos.principal</name>
-      <value>nn/_HOST@EXAMPLE.COM</value>
-    </property>
-    
-    <property>
-      <name>dfs.secondary.namenode.keytab.file</name>
-      <value>/etc/security/keytabs/nn.service.keytab</value>
-    </property>
-    
-    <property>
       <name>dfs.support.append</name>
       <value>true</value>
       <final>true</final>
-    </property>
-    
-    <property>
-      <name>dfs.web.authentication.kerberos.keytab</name>
-      <value>/etc/security/keytabs/spnego.service.keytab</value>
-    </property>
-    
-    <property>
-      <name>dfs.web.authentication.kerberos.principal</name>
-      <value>HTTP/_HOST@EXAMPLE.COM</value>
     </property>
     
     <property>

@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!--Tue May 12 17:17:44 2015--><configuration>
+<!--Sun Jul 12 10:06:57 2015--><configuration>
     
     <property>
       <name>dfs.domain.socket.path</name>
       <value>/var/lib/hadoop-hdfs/dn_socket</value>
-    </property>
-    
-    <property>
-      <name>hbase.bulkload.staging.dir</name>
-      <value>/apps/hbase/staging</value>
     </property>
     
     <property>
@@ -33,7 +28,7 @@
     
     <property>
       <name>hbase.coprocessor.region.classes</name>
-      <value>org.apache.hadoop.hbase.security.token.TokenProvider,org.apache.hadoop.hbase.security.access.SecureBulkLoadEndpoint,com.xasecure.authorization.hbase.XaSecureAuthorizationCoprocessor</value>
+      <value>com.xasecure.authorization.hbase.XaSecureAuthorizationCoprocessor</value>
     </property>
     
     <property>
@@ -97,16 +92,6 @@
     </property>
     
     <property>
-      <name>hbase.master.kerberos.principal</name>
-      <value>hbase/_HOST@EXAMPLE.COM</value>
-    </property>
-    
-    <property>
-      <name>hbase.master.keytab.file</name>
-      <value>hbase.service.keytab</value>
-    </property>
-    
-    <property>
       <name>hbase.master.port</name>
       <value>60000</value>
     </property>
@@ -132,23 +117,13 @@
     </property>
     
     <property>
-      <name>hbase.regionserver.kerberos.principal</name>
-      <value>hbase/_HOST@EXAMPLE.COM</value>
-    </property>
-    
-    <property>
-      <name>hbase.regionserver.keytab.file</name>
-      <value>hbase.service.keytab</value>
-    </property>
-    
-    <property>
       <name>hbase.rootdir</name>
-      <value>hdfs://allinone:8020/apps/hbase/data</value>
+      <value>hdfs://datanode/apps/hbase/data</value>
     </property>
     
     <property>
       <name>hbase.security.authentication</name>
-      <value>kerberos</value>
+      <value>simple</value>
     </property>
     
     <property>
@@ -173,7 +148,7 @@
     
     <property>
       <name>hbase.zookeeper.quorum</name>
-      <value>allinone</value>
+      <value>ambarisrv,datanode1,datanode</value>
     </property>
     
     <property>
@@ -193,7 +168,7 @@
     
     <property>
       <name>zookeeper.znode.parent</name>
-      <value>/hbase-secure</value>
+      <value>/hbase-unsecure</value>
     </property>
     
   <property>
